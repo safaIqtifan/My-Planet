@@ -6,56 +6,16 @@ public class UserModel implements Serializable {
 
     public String user_id;
     public String username;
-    public String message_body;
-    public String date;
-    public String imageURL;
+    public String email;
+    public String gender;
 
     public UserModel() {
     }
 
-    public UserModel(String name, String message_body, String date) {
+    public UserModel(String name, String email, String gender) {
         this.username = name;
-        this.message_body = message_body;
-        this.date = date;
+        this.email = email;
+        this.gender = gender;
     }
 
-//    public String getId() {
-//        return user_id;
-//    }
-//
-//    public void setId(String id) {
-//        this.user_id = id;
-//    }
-//
-//    public String getName() {
-//        return username;
-//    }
-//
-//    public void setName(String name) {
-//        this.username = name;
-//    }
-//
-//    public String getMessage_body() {
-//        return message_body;
-//    }
-//
-//    public void setMessage_body(String message_body) {
-//        this.message_body = message_body;
-//    }
-//
-//    public String getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(String date) {
-//        this.date = date;
-//    }
-//
-//    public String getPhoto() {
-//        return imageURL;
-//    }
-//
-//    public void setPhoto(String photo) {
-//        this.imageURL = photo;
-//    }
 }

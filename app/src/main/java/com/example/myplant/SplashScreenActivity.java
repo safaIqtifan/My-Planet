@@ -6,26 +6,29 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+
+public class SplashScreenActivity extends AppCompatActivity {
 
     final private static int splashTimeOut = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash_screen);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                Intent i = new Intent(MainActivity.this, OnboardingActivity.class);
-                startActivity(i);
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    startActivity(new Intent(SplashScreenActivity.this, OnboardingActivity.class));
+                } else {
+                    Intent i = new Intent(SplashScreenActivity.this, SigninActivity.class);
+                    startActivity(i);
+                }
                 finish();
-
             }
         }, splashTimeOut);
-
-
     }
 }
