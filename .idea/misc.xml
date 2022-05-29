@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/box1.xml" value="0.122" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/box1border.xml" value="0.122" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/button_background.xml" value="0.122" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/ic_logo.xml" value="0.1415" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/empty.xml" value="0.122" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/female_btn.xml" value="0.122" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/female_btn_border.xml" value="0.1965" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/male_btn.xml" value="0.2115" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/male_btn_border.xml" value="0.1965" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/name.xml" value="0.1" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_main.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_sign_in.xml" value="0.21" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_signup.xml" value="0.2" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_view_pagers.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/slides_layout1.xml" value="0.20416666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

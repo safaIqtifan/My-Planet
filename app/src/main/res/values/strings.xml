@@ -1,0 +1,19 @@
+<resources>
+
+    <string name="app_name">My Plant</string>
+
+    <string name="Signup">Signup</string>
+    <string name="fullName">Full Name</string>
+    <string name="helloWelcomeBack">"Hello, welcome back"</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="gender">Gender</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="termsConditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="haveAccount">I Already have an account?</string>
+    <string name="please_log_in">Please Log in</string>
+    <string name="signin">Signin</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+</resources>
