@@ -13,6 +13,7 @@
     <string name="termsConditions"><![CDATA[Terms & Conditions]]></string>
     <string name="haveAccount">I Already have an account?</string>
     <string name="please_log_in">Please Log in</string>
+    <string name="please_signup">Please Signup</string>
     <string name="signin">Signin</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="welcome">Welcome</string>
@@ -37,5 +38,6 @@
     <string name="represent_all_my_favorite_articles">Represent all my favorite articles</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Signin">signin</string>
 
 </resources>

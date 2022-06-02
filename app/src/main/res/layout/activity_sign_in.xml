@@ -73,8 +73,9 @@
                     android:id="@+id/emailEd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/name"
-                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/email"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/email"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,8 +94,8 @@
                     android:id="@+id/passwordEd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/name"
-                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/keyboard"
+                    android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -155,7 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background"
-                android:text="@string/Signup"
+                android:text="@string/Signin"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -163,23 +164,24 @@
                 android:paddingEnd="8dp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/haveAccount" />
+                    android:text="@string/haveAccount"
+                    android:textColor="@color/light_black2"/>
 
                 <TextView
                     android:id="@+id/createBtn"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
-                    android:text="@string/please_log_in"
+                    android:text="@string/please_signup"
                     android:textColor="@color/text2" />
 
             </LinearLayout>

@@ -73,8 +73,8 @@
                     android:id="@+id/fullNameEd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/name"
-                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/person"
+                    android:drawablePadding="10dp"
                     android:hint="@string/fullName"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,8 +94,9 @@
                     android:id="@+id/emailEd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/name"
-                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/email"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/email"
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,8 +115,8 @@
                     android:id="@+id/passwordEd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/name"
-                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/keyboard"
+                    android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -124,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/box1"
+                android:background="@drawable/box1_white"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
@@ -198,12 +199,14 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/termsConditions"
+                    android:id="@+id/termsConditionsCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="I Agree All" />
+                    android:text="I Agree All"
+                    android:textColor="@color/light_black2" />
 
                 <TextView
+                    android:id="@+id/termsConditions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
@@ -269,6 +272,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/light_black2"
                     android:text="@string/haveAccount" />
 
                 <TextView

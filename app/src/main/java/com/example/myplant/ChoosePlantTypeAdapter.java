@@ -40,7 +40,7 @@ public class ChoosePlantTypeAdapter extends RecyclerView.Adapter<ChoosePlantType
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         ChoosePlantTypeModel choosePlantTypeModel = list.get(position);
-        Glide.with(activity).asBitmap().load(choosePlantTypeModel.choosenPlantPhoto).into(holder.plantImageView);
+        Glide.with(activity).asBitmap().load(choosePlantTypeModel.choosenPlantPhoto).placeholder(R.drawable.planttype).into(holder.plantImageView);
     }
 
     @Override

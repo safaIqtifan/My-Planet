@@ -48,11 +48,15 @@ public class SignupActivity extends AppCompatActivity {
         binding.female.setOnClickListener(view -> {
             genderResulteStr = "female";
             binding.genderResultEd.setText(genderResulteStr);
+            binding.female.setBackgroundResource(R.drawable.female_btn);
+            binding.male.setBackgroundResource(R.drawable.male_btn_border);
         });
 
         binding.male.setOnClickListener(view -> {
             genderResulteStr = "male";
             binding.genderResultEd.setText(genderResulteStr);
+            binding.female.setBackgroundResource(R.drawable.female_btn_border);
+            binding.male.setBackgroundResource(R.drawable.male_btn);
         });
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +116,7 @@ public class SignupActivity extends AppCompatActivity {
         if (passwordStr.length() < 6) {
             binding.passwordEd.setError("password Must be 6 or more characters");
         }
-        if (binding.termsConditions.isChecked()){
+        if (binding.termsConditionsCheck.isChecked()){
 
         }else {
             binding.termsConditions.setError("Checke Terms and Conditions to continue");
