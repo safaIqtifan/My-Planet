@@ -86,7 +86,7 @@ public class SignupActivity extends AppCompatActivity {
         FirebaseUser user = fAuth.getCurrentUser();
 
         if (user != null) {
-            Intent intent = new Intent(getApplicationContext(), HomePageActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ChooseMyPlantActivity.class);
             startActivity(intent);
             finish();
         }
@@ -148,7 +148,7 @@ public class SignupActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
 
                                     Toast.makeText(SignupActivity.this, "User created", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(SignupActivity.this, HomePageActivity.class)
+                                    startActivity(new Intent(SignupActivity.this, ChooseMyPlantActivity.class)
                                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                                     finish();
                                     binding.progressBar.setVisibility(View.GONE);

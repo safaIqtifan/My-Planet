@@ -115,7 +115,7 @@ public class SigninActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             binding.progressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(SigninActivity.this, HomePageActivity.class)
+                            startActivity(new Intent(SigninActivity.this, ChooseMyPlantActivity.class)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             finish();
 

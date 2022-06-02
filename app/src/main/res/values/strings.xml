@@ -15,5 +15,27 @@
     <string name="please_log_in">Please Log in</string>
     <string name="signin">Signin</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="welcome">Welcome</string>
+    <string name="please_choose_your_favorite_plants_type">Please choose your favorite plants type</string>
+    <string name="username">userName</string>
+    <string name="plant_chosen">Plant Chosen</string>
+    <string name="add">Add</string>
+    <string name="title_my_plant">My plant</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_favourite">Favourite</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="you_didn_t_add_any_plant">You didn’t add any plant.\n Yet Add some</string>
+    <string name="empty_plant">Empty Plant</string>
+    <string name="edit_your_personal_information">Edit your personal information</string>
+    <string name="my_info">My Info</string>
+    <string name="logout">Logout</string>
+    <string name="terms_condition"><![CDATA[Terms & Condition]]></string>
+    <string name="artical">Artical</string>
+    <string name="read_clemance_terms">Read Clemance terms and condition</string>
+    <string name="read_clemance_terms_and_condition">Read Clemance terms and condition</string>
+    <string name="represent_all_my_favorite_articles">Represent all my favorite articles</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -2,9 +2,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <color name="purple_200">#E4E1E1</color>
-    <color name="purple_500">#FFFFFF</color>
+    <color name="purple_500">#3C6934</color>
     <color name="purple_700">#D1CBCB</color>
-    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_200">#FFA702</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -16,7 +16,7 @@
     <color name="button">#74B973</color>
     <color name="background">#C1E4D1</color>
     <color name="darkblue">#11293F</color>
-    <color name="blue">#25435E</color>
+    <color name="light_blue">#D4DBE5</color>
     <color name="bluebtnColor">#289BE8</color>
     <color name="gry">#CABEBE</color>
     <color name="black_trans">#90000000</color>
