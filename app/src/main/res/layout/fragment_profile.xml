@@ -7,8 +7,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/backgroundColor"
-    android:padding="16dp"
     tools:context=".fragment.ProfileFragment">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/item_app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_imag"
@@ -23,6 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/proUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="name"
@@ -146,6 +162,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -156,6 +173,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/logout"
+            android:layout_margin="8dp"
             android:layout_weight="2"/>
 
         <TextView
@@ -167,5 +185,5 @@
             android:layout_gravity="center"/>
 
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

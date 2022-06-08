@@ -8,7 +8,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myplant.Model.UserModel;
 import com.example.myplant.classes.Constants;
+import com.example.myplant.classes.UtilityApp;
 import com.example.myplant.databinding.ActivitySignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
     String nameStr = "";
     String emailStr = "";
     String passwordStr = "";
+    UserModel userModel ;
 
 
     @Override
@@ -44,6 +47,7 @@ public class SignupActivity extends AppCompatActivity {
 
         fireStoreDB = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
+        userModel = new UserModel();
 
         binding.female.setOnClickListener(view -> {
             genderResulteStr = "female";
@@ -123,6 +127,10 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
+        userModel.fullName = nameStr;
+        userModel.email = emailStr;
+        userModel.gender = genderResulteStr;
+
         firebaseAuth();
 
     }
@@ -141,9 +149,10 @@ public class SignupActivity extends AppCompatActivity {
 
                 Map<String, Object> userMap = new HashMap<>();
                 userMap.put("user_id", userid);
-                userMap.put("fullName", nameStr);
-                userMap.put("email", emailStr);
-                userMap.put("gender", genderResulteStr);
+                userMap.put("fullName", userModel.fullName);
+                userMap.put("email", userModel.email);
+                userMap.put("gender", userModel.gender);
+                userMap.put("userProImage", userModel.userImage);
 
                 fireStoreDB.collection(Constants.USER).document(userid).set(userMap, SetOptions.merge())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -152,8 +161,12 @@ public class SignupActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
 
                                     Toast.makeText(SignupActivity.this, "User created", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(SignupActivity.this, ChooseMyPlantActivity.class)
-                                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
+                                    Intent intent = new Intent(SignupActivity.this, ChooseMyPlantActivity.class)
+                                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                    intent.putExtra("name", userModel.username);
+                                    UtilityApp.setUserData(userModel.fullName);
+                                    startActivity(intent);
                                     finish();
                                     binding.progressBar.setVisibility(View.GONE);
                                 } else {

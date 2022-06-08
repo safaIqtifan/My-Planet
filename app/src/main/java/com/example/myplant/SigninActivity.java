@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myplant.databinding.ActivitySignInBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,11 +18,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SigninActivity extends AppCompatActivity {
 
     ActivitySignInBinding binding;
     FirebaseAuth fAuth;
+    FirebaseFirestore fireStoreDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         fAuth = FirebaseAuth.getInstance();
+        fireStoreDB = FirebaseFirestore.getInstance();
 
         binding.signinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +122,7 @@ public class SigninActivity extends AppCompatActivity {
                             startActivity(new Intent(SigninActivity.this, ChooseMyPlantActivity.class)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             finish();
+//                            UtilityApp.setUserData(userModel.username);
 
                         } else {
                             binding.progressBar.setVisibility(View.GONE);
@@ -127,5 +132,7 @@ public class SigninActivity extends AppCompatActivity {
                 });
 
     }
+
+
 
 }

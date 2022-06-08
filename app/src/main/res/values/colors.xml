@@ -9,9 +9,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="red">#FF0000</color>
+
     <color name="light_black">#252424</color>
     <color name="light_black2">#F7121212</color>
     <color name="gray1">#655C5C</color>
+    <color name="gray">#A8A4A4</color>
     <color name="green">#789E3E</color>
     <color name="button">#74B973</color>
     <color name="background">#C1E4D1</color>

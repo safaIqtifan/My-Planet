@@ -260,6 +260,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background"
                 android:text="@string/Signup"
+                android:drawableRight="@drawable/arrow"
+                android:gravity="center"
+                android:padding="8dp"
                 android:textColor="@color/white" />
 
             <LinearLayout

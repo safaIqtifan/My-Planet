@@ -7,16 +7,27 @@
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/box1border.xml" value="0.122" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/button_background.xml" value="0.122" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/ic_logo.xml" value="0.1415" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/item_myplant_background.xml" value="0.1645" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/notification_shap.xml" value="0.181" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/arrowf.xml" value="0.1645" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/box1_white.xml" value="0.181" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/box3.xml" value="0.1645" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/calendar.xml" value="0.1645" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/calendar_dark.xml" value="0.1645" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/camera.xml" value="0.1645" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/close.xml" value="0.1645" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/close_trans.xml" value="0.1645" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/delete_image.xml" value="0.1645" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/empty.xml" value="0.122" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/female_btn.xml" value="0.122" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/female_btn_border.xml" value="0.1965" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/home.xml" value="0.166" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.166" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1645" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.166" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.181" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/item_background_shap.xml" value="0.13" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/line_background.xml" value="0.1645" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/male_btn.xml" value="0.2115" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/male_btn_border.xml" value="0.1965" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/name.xml" value="0.1" />
@@ -25,6 +36,7 @@
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/profile.xml" value="0.181" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable/transparent_background.xml" value="0.1" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout-sw600dp/activity_nav.xml" value="0.153125" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_add_plant.xml" value="0.2" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_choose_my_plant.xml" value="0.21" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_home_page.xml" value="0.2" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_main.xml" value="0.19010416666666666" />
@@ -34,12 +46,18 @@
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_signup.xml" value="0.2" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/activity_view_pagers.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/fragment_favourite.xml" value="0.1675213675213675" />
-        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/fragment_my_plant.xml" value="0.21" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/fragment_profile.xml" value="0.21" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_app_bar_main.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_app_nav.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_chosen_shap.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_my_plant.xml" value="0.21" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_myplant.xml" value="0.25" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_select_image.xml" value="0.22" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/slides_layout1.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/slides_layout2.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/slides_layout3.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/menu/buttom_nav_menu.xml" value="0.1675213675213675" />
       </map>

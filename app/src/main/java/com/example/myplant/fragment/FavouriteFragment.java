@@ -13,7 +13,7 @@ import com.example.myplant.databinding.FragmentFavouriteBinding;
 
 public class FavouriteFragment extends Fragment {
 
-    private FragmentFavouriteBinding binding;
+    FragmentFavouriteBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
