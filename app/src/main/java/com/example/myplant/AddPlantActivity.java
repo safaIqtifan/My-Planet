@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myplant.Model.AddPlantModel;
+import com.example.myplant.Model.UserModel;
 import com.example.myplant.classes.Constants;
 import com.example.myplant.classes.UtilityApp;
 import com.example.myplant.databinding.ActivityAddPlantBinding;
@@ -48,6 +49,7 @@ public class AddPlantActivity extends AppCompatActivity {
     AddPlantModel addPlantModel;
     FirebaseFirestore fireStoreDB;
     String plantTypeSpinnerStr = "";
+    UserModel userModel;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
@@ -61,6 +63,9 @@ public class AddPlantActivity extends AppCompatActivity {
         fireStoreDB = FirebaseFirestore.getInstance();
         addPlantModel = new AddPlantModel();
 
+        userModel = UtilityApp.getUserData();
+        binding.include.title.setText("My Profile");
+
         binding.nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +78,6 @@ public class AddPlantActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
                     if (getApplicationContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                             == PackageManager.PERMISSION_DENIED) {
                         String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
@@ -231,7 +235,7 @@ public class AddPlantActivity extends AppCompatActivity {
 
         addPlantModel.plantName = plantNameStr;
         addPlantModel.plantAge = plantAgeStr;
-        addPlantModel.plantType =plantTypeSpinnerStr;
+        addPlantModel.plantType = plantTypeSpinnerStr;
         addPlantModel.plantDescription = plantDescriptionStr;
 
         uploadPhoto(plantPhotoUri);
@@ -245,7 +249,7 @@ public class AddPlantActivity extends AppCompatActivity {
 
         Map<String, Object> postModelMap = new HashMap<>();
         postModelMap.put("plant_id", plantId);
-        postModelMap.put("userId", UtilityApp.getUserData());
+        postModelMap.put("userId", userModel.user_id);
         postModelMap.put("plantName", addPlantModel.plantName);
         postModelMap.put("plantAge", addPlantModel.plantAge);
         postModelMap.put("plantType", addPlantModel.plantType);

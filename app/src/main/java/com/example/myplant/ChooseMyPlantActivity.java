@@ -1,5 +1,6 @@
 package com.example.myplant;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,9 +21,7 @@ import com.example.myplant.databinding.ActivityChooseMyPlantBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.xiaofeng.flowlayoutmanager.FlowLayoutManager;
 
@@ -38,6 +37,8 @@ public class ChooseMyPlantActivity extends AppCompatActivity {
     FirebaseFirestore fireStoreDB;
     ChoosePlantTypeModel choosePlantTypeModel;
     FirebaseAuth fAuth;
+    UserModel userModelData;
+    private ProgressDialog lodingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,10 @@ public class ChooseMyPlantActivity extends AppCompatActivity {
 
         fireStoreDB = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
-        getData();
+        lodingBar = new ProgressDialog(ChooseMyPlantActivity.this);
+
+        userModelData = UtilityApp.getUserData();
+        binding.username.setText(userModelData.fullName);
 //        Bundle bundle = getIntent().getExtras();
 //        binding.username.setText(bundle.getString("name"));
 
@@ -56,12 +60,12 @@ public class ChooseMyPlantActivity extends AppCompatActivity {
         choosePlantTypeModel = new ChoosePlantTypeModel();
 
         choosePlantTypeModelArrayList = new ArrayList<>();
-        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("0", "صبار", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype1.png?alt=media&token=34ddf427-4484-4cb2-98ed-3df5b91d7c77"));
-        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("1", "ورود", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype2.png?alt=media&token=d5635f5c-b3ed-40f0-95a1-7de4c8d0cf8b"));
-        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("2", "أشجار", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype3.png?alt=media&token=09ed43ce-6149-418c-9a76-4aa1f763ae72"));
-        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("3", "نباتات", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype4.png?alt=media&token=352d2826-c73c-46af-b521-042ec9813469"));
-        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("4", "حشائش", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype5.png?alt=media&token=f3c0b688-337b-4976-8e96-c68124dcff8f"));
-        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("5", "نباتات زينة", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype6.png?alt=media&token=f94fb0b1-0536-470a-97a1-9ec47fc2960b"));
+        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("", "صبار", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype1.png?alt=media&token=34ddf427-4484-4cb2-98ed-3df5b91d7c77"));
+        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("", "ورود", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype2.png?alt=media&token=d5635f5c-b3ed-40f0-95a1-7de4c8d0cf8b"));
+        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("", "أشجار", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype3.png?alt=media&token=09ed43ce-6149-418c-9a76-4aa1f763ae72"));
+        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("", "نباتات", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype4.png?alt=media&token=352d2826-c73c-46af-b521-042ec9813469"));
+        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("", "حشائش", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype5.png?alt=media&token=f3c0b688-337b-4976-8e96-c68124dcff8f"));
+        choosePlantTypeModelArrayList.add(new ChoosePlantTypeModel("", "نباتات زينة", "https://firebasestorage.googleapis.com/v0/b/my-plant-6d13d.appspot.com/o/plantType%2Ftype6.png?alt=media&token=f94fb0b1-0536-470a-97a1-9ec47fc2960b"));
 
         binding.rv.setLayoutManager(new GridLayoutManager(ChooseMyPlantActivity.this, 3,
                 GridLayoutManager.VERTICAL, false));
@@ -83,11 +87,18 @@ public class ChooseMyPlantActivity extends AppCompatActivity {
                 if (selectedPlantType.isEmpty()) {
                     Toast.makeText(ChooseMyPlantActivity.this, R.string.please_select_one_least, Toast.LENGTH_SHORT).show();
                     return;
-                }else {
-                    binding.loadingLY.setVisibility(View.VISIBLE);
-                    sendPostToFirebase();
                 }
 
+                lodingBar.setTitle("Save selections");
+                lodingBar.setMessage("Please wait while the selections are saved");
+                lodingBar.setCanceledOnTouchOutside(false);
+                lodingBar.show();
+
+                for (ChoosePlantTypeModel choosePlantTypeModel : selectedPlantType) {
+                    sendPostToFirebase(choosePlantTypeModel);
+                }
+                startActivity(new Intent(ChooseMyPlantActivity.this, NavigationActivity.class));
+                finish();
             }
         });
 
@@ -124,15 +135,18 @@ public class ChooseMyPlantActivity extends AppCompatActivity {
         binding.selectedRV.setAdapter(adapter);
     }
 
-    private void sendPostToFirebase() {
+    private void sendPostToFirebase(ChoosePlantTypeModel choosePlantTypeModel) {
+
+        String plantTypeId = fireStoreDB.collection(Constants.TYPE).document().getId(); // this is auto genrat
 
         Map<String, Object> postModelMap = new HashMap<>();
-        postModelMap.put("plantTypeId", choosePlantTypeModel.plantTypeId);
-        postModelMap.put("userPlantTypeId", UtilityApp.getUserData());
+        postModelMap.put("plantTypeId", plantTypeId);
+        postModelMap.put("userPlantTypeId", userModelData.user_id);
         postModelMap.put("choosenPlantName", choosePlantTypeModel.choosenPlantName);
         postModelMap.put("choosenPlantPhoto", choosePlantTypeModel.choosenPlantPhoto);
 
-        fireStoreDB.collection(Constants.TYPE).document(choosePlantTypeModel.plantTypeId).set(postModelMap, SetOptions.merge())
+        fireStoreDB.collection(Constants.USER).document(userModelData.user_id).collection(Constants.TYPE)
+                .document(plantTypeId).set(postModelMap, SetOptions.merge())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -140,8 +154,7 @@ public class ChooseMyPlantActivity extends AppCompatActivity {
                         binding.loadingLY.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), getString(R.string.success_add_post), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(ChooseMyPlantActivity.this, NavigationActivity.class));
-                            finish();
+
                         } else {
                             Toast.makeText(getApplicationContext(), getString(R.string.fail_add_post), Toast.LENGTH_SHORT).show();
                         }
@@ -149,27 +162,5 @@ public class ChooseMyPlantActivity extends AppCompatActivity {
                 });
     }
 
-    public void getData() {
-
-        fireStoreDB.collection(Constants.USER)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                if (task.isSuccessful()) {
-
-                    for (DocumentSnapshot document : task.getResult().getDocuments()) {
-                        UserModel userModel = document.toObject(UserModel.class);
-                        if ((userModel.user_id).equals(fAuth.getUid())) {
-                            UtilityApp.setUserData(userModel.fullName);
-                        }
-                        binding.username.setText(UtilityApp.getUserData());
-                    }
-                } else {
-                    Toast.makeText(ChooseMyPlantActivity.this, getString(R.string.fail_get_data), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
 }

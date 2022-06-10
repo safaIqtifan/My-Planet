@@ -8,7 +8,7 @@ public class UserModel implements Serializable {
     public String fullName;
     public String email;
     public String gender;
-    public String userImage;
+    public String userImage = "";
 
     public UserModel() {
     }

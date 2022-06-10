@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myplant.Model.UserModel;
+import com.example.myplant.classes.Constants;
+import com.example.myplant.classes.UtilityApp;
 import com.example.myplant.databinding.ActivitySignInBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,6 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SigninActivity extends AppCompatActivity {
@@ -60,11 +65,10 @@ public class SigninActivity extends AppCompatActivity {
                 passWordResetDialog.setTitle("Reset Password ?");
                 passWordResetDialog.setMessage("Enter your E-mail to Reset Link ");
                 passWordResetDialog.setView(resetMail);
-
                 passWordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         String mail = resetMail.getText().toString();
                         fAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -92,6 +96,16 @@ public class SigninActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+//            startActivity(new Intent(SigninActivity.this, NavigationActivity.class));
+//            finish();
+//        }
+//    }
+
     public void ValidData() {
 
         String emailStr = binding.emailEd.getText().toString();
@@ -116,16 +130,13 @@ public class SigninActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        binding.progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-
-                            binding.progressBar.setVisibility(View.GONE);
+                            getData();
                             startActivity(new Intent(SigninActivity.this, ChooseMyPlantActivity.class)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             finish();
-//                            UtilityApp.setUserData(userModel.username);
-
                         } else {
-                            binding.progressBar.setVisibility(View.GONE);
                             Toast.makeText(SigninActivity.this, "fail_to_login", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -133,6 +144,32 @@ public class SigninActivity extends AppCompatActivity {
 
     }
 
+    public void getData() {
+
+        FirebaseUser firebaseUser = fAuth.getCurrentUser();
+        assert firebaseUser != null;
+        String userid = firebaseUser.getUid();
+
+        fireStoreDB.collection(Constants.USER).document(userid).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            UserModel user = task.getResult().toObject(UserModel.class);
+//                            for (DocumentSnapshot document : task.getResult().getDocuments()) {
+//                                UserModel userModel = document.toObject(UserModel.class);
+//                                if ((userModel.user_id).equals(fAuth.getUid())) {
+                                    UtilityApp.setUserData(user);
+//                                }
+//                        UserModel userDataModel = UtilityApp.getUserData();
+//                                Toast.makeText(SigninActivity.this, user., Toast.LENGTH_SHORT).show();
+//                            }
+                        } else {
+                            Toast.makeText(SigninActivity.this, getString(R.string.fail_get_data), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
 
 }

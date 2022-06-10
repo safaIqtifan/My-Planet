@@ -21,6 +21,8 @@ public class FavouriteFragment extends Fragment {
         binding = FragmentFavouriteBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        binding.include.title.setText("Favourite");
+
         return root;
     }
 

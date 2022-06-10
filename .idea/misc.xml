@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/box1.xml" value="0.122" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/box1border.xml" value="0.122" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/boxView.xml" value="0.1515" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/button_background.xml" value="0.122" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/ic_logo.xml" value="0.1415" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/drawable-v24/item_myplant_background.xml" value="0.1645" />
@@ -51,10 +52,13 @@
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/fragment_profile.xml" value="0.21" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_app_bar_main.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_app_nav.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_choosen_plant.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_chosen_shap.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_home_choosen_plant.xml" value="0.33" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_my_plant.xml" value="0.21" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_myplant.xml" value="0.25" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_select_image.xml" value="0.22" />
+        <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/item_terms.xml" value="0.2" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/slides_layout1.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/slides_layout2.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/safa/StudioProjects/MyPlant/app/src/main/res/layout/slides_layout3.xml" value="0.1675213675213675" />

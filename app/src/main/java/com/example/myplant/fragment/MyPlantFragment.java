@@ -2,6 +2,7 @@ package com.example.myplant.fragment;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myplant.Adapter.MyPlantAdapter;
 import com.example.myplant.Model.AddPlantModel;
+import com.example.myplant.Model.UserModel;
 import com.example.myplant.R;
 import com.example.myplant.classes.Constants;
+import com.example.myplant.classes.UtilityApp;
 import com.example.myplant.databinding.FragmentMyPlantBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -36,14 +42,21 @@ public class MyPlantFragment extends Fragment {
     FragmentMyPlantBinding binding;
     ArrayList<AddPlantModel> addPlantModelList;
     MyPlantAdapter adapter;
-
+    FirebaseAuth fAuth;
     FirebaseFirestore fireStoreDB;
+    UserModel userModelObj;
+    AddPlantModel myPlantList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentMyPlantBinding.inflate(inflater, container, false);
 
+        fAuth = FirebaseAuth.getInstance();
+        userModelObj = UtilityApp.getUserData();
+        fireStoreDB = FirebaseFirestore.getInstance();
+        fetchData();
+        binding.include.title.setText("My Plant");
 
         return binding.getRoot();
     }
@@ -52,20 +65,9 @@ public class MyPlantFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         addPlantModelList = new ArrayList<>();
-
         binding.rvPlants.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-//        if (addPlantModelList.size() == 0){
-//            binding.emptyList.setVisibility(View.VISIBLE);
-//            binding.rvPlantList.setVisibility(View.GONE);
-//        }else {
-//            binding.emptyList.setVisibility(View.GONE);
-//            binding.rvPlantList.setVisibility(View.VISIBLE);
-//
-//        }
-        fetchData();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(binding.rvPlants);
     }
@@ -89,17 +91,32 @@ public class MyPlantFragment extends Fragment {
 
                     deletedMovie = addPlantModelList.get(position);
 
+                    fireStoreDB.collection(Constants.PLANT).document(deletedMovie.plant_id)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("TAG", "DocumentSnapshot successfully deleted!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("TAG", "Error deleting document", e);
+                                }
+                            });
+
                     addPlantModelList.remove(position);
                     adapter.notifyItemRemoved(position);
 
-                    Snackbar.make(binding.rvPlants, (CharSequence) deletedMovie, Snackbar.LENGTH_LONG)
-                            .setAction("Undo", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    addPlantModelList.add(position, deletedMovie);
-                                    adapter.notifyItemInserted(position);
-                                }
-                            });
+//                    Snackbar.make(binding.rvPlants, deletedMovie, Snackbar.LENGTH_LONG)
+//                            .setAction("Undo", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    addPlantModelList.add(position, deletedMovie);
+//                                    adapter.notifyItemInserted(position);
+//                                }
+//                            });
                     break;
 
                 case ItemTouchHelper.RIGHT:
@@ -129,10 +146,19 @@ public class MyPlantFragment extends Fragment {
     };
 
     private void initAdapter() {
+
         System.out.println("Log addPlantModelList " + addPlantModelList.size());
         adapter = new MyPlantAdapter(requireActivity(), addPlantModelList);
         binding.rvPlants.setAdapter(adapter);
-        binding.rvPlants.setVisibility(View.VISIBLE);
+
+        if (addPlantModelList.size() == 0){
+            binding.emptyList.setVisibility(View.VISIBLE);
+            binding.rvPlants.setVisibility(View.GONE);
+        }else {
+            binding.emptyList.setVisibility(View.GONE);
+            binding.rvPlants.setVisibility(View.VISIBLE);
+        }
+//        binding.rvPlants.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -144,6 +170,37 @@ public class MyPlantFragment extends Fragment {
     public void fetchData() {
 
         binding.loadingLY.setVisibility(View.VISIBLE);
+
+        FirebaseUser firebaseUser = fAuth.getCurrentUser();
+        assert firebaseUser != null;
+        String userid = firebaseUser.getUid();
+
+//        fireStoreDB.collection(Constants.PLANT).document().get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if (task.isSuccessful()) {
+////                            myPlantList = task.getResult().toObject(AddPlantModel.class);
+////                                initAdapter();
+//                            myPlantList.userId
+//                            AddPlantModel myPlantList = task.getResult().toObject(AddPlantModel.class);
+//                            for (DocumentSnapshot document : task.getResult().getDocuments()) {
+//                                UserModel userModel = document.toObject(UserModel.class);
+//                                if ((userModel.user_id).equals(fAuth.getUid())) {
+//
+//                                }
+//                        UserModel userDataModel = UtilityApp.getUserData();
+//                                Toast.makeText(SigninActivity.this, user., Toast.LENGTH_SHORT).show();
+//                            }
+//                        } else {
+//                            Toast.makeText(getActivity(), getString(R.string.fail_get_data), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//        if (showLoading) {
+//            binding.loadingLY.setVisibility(View.VISIBLE);
+//        }
+
         fireStoreDB.collection(Constants.PLANT)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -157,7 +214,10 @@ public class MyPlantFragment extends Fragment {
                     for (DocumentSnapshot document : task.getResult().getDocuments()) {
                         AddPlantModel addPlantModel = document.toObject(AddPlantModel.class);
                         System.out.println("Log addPlantModel " + addPlantModel.plantName);
-                        addPlantModelList.add(addPlantModel);
+
+                        if (addPlantModel.userId.equals(userid)){
+                            addPlantModelList.add(addPlantModel);
+                        }
                     }
 //                    adapter.myArray = addPlantModelList;
 //                    adapter.notifyDataSetChanged();

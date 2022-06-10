@@ -5,21 +5,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     android:background="@color/backgroundColor"
     tools:context=".AddPlantActivity">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/item_app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:orientation="vertical">
 
             <ImageView
@@ -31,24 +41,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/plantImageRv"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/imageView"-->
-<!--                tools:listitem="@layout/item_select_image" />-->
+            <!--            <androidx.recyclerview.widget.RecyclerView-->
+            <!--                android:id="@+id/plantImageRv"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/imageView"-->
+            <!--                tools:listitem="@layout/item_select_image" />-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:hint="@string/plant_name"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                android:layout_marginTop="20dp"
                 app:boxCornerRadiusBottomEnd="15dp"
                 app:boxCornerRadiusBottomStart="15dp"
                 app:boxCornerRadiusTopEnd="15dp"
@@ -59,20 +69,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/plant_name"
+                    android:inputType="text"
                     android:textColorHint="@color/gray"
-                    android:textSize="16sp"
-                    android:inputType="text" />
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/box1_white"
                 android:hint="@string/plant_name"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/box1_white"
                 app:boxCornerRadiusBottomEnd="15dp"
                 app:boxCornerRadiusBottomStart="15dp"
                 app:boxCornerRadiusTopEnd="15dp"
@@ -82,21 +92,21 @@
                     android:id="@+id/plantTypeSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
                     android:entries="@array/selectPlantType"
-                    android:minHeight="50dp"/>
+                    android:minHeight="50dp"
+                    android:paddingVertical="5dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/box1_white"
+                android:gravity="center"
                 android:hint="@string/age"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:background="@drawable/box1_white"
                 app:boxCornerRadiusBottomEnd="15dp"
                 app:boxCornerRadiusBottomStart="15dp"
                 app:boxCornerRadiusTopEnd="15dp"
@@ -106,11 +116,11 @@
                     android:id="@+id/plantAgeEd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/age"
-                    android:textColorHint="@color/gray1"
                     android:drawableEnd="@drawable/calendar"
-                    android:paddingEnd="20dp"
+                    android:hint="@string/age"
                     android:paddingStart="8dp"
+                    android:paddingEnd="20dp"
+                    android:textColorHint="@color/gray1"
                     android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -118,11 +128,11 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/box1"
                 android:hint="@string/description"
                 app:boxBackgroundColor="@color/white"
                 app:boxBackgroundMode="outline"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/box1"
                 app:boxCornerRadiusBottomEnd="15dp"
                 app:boxCornerRadiusBottomStart="15dp"
                 app:boxCornerRadiusTopEnd="15dp"
@@ -132,12 +142,12 @@
                     android:id="@+id/plantDescriptionEd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/gray1"
-                    android:textSize="16sp"
-                    android:inputType="textMultiLine"
                     android:ems="10"
                     android:gravity="top"
-                    android:lines="5"/>
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:textColorHint="@color/gray1"
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -22,9 +22,6 @@
             android:exported="true"
             android:label="@string/title_activity_navigation"/>
         <activity
-            android:name=".NavActivity"
-            android:exported="false" />
-        <activity
             android:name=".ChooseMyPlantActivity"
             android:exported="false" />
         <activity

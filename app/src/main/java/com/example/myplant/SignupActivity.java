@@ -35,7 +35,7 @@ public class SignupActivity extends AppCompatActivity {
     String nameStr = "";
     String emailStr = "";
     String passwordStr = "";
-    UserModel userModel ;
+    UserModel userModel;
 
 
     @Override
@@ -87,19 +87,19 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseUser user = fAuth.getCurrentUser();
-
-        if (user != null) {
-            Intent intent = new Intent(getApplicationContext(), ChooseMyPlantActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        FirebaseUser user = fAuth.getCurrentUser();
+//
+//        if (user != null) {
+//            Intent intent = new Intent(getApplicationContext(), ChooseMyPlantActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//
+//    }
 
     private void checkData() {
 
@@ -120,9 +120,9 @@ public class SignupActivity extends AppCompatActivity {
         if (passwordStr.length() < 6) {
             binding.passwordEd.setError("password Must be 6 or more characters");
         }
-        if (binding.termsConditionsCheck.isChecked()){
+        if (binding.termsConditionsCheck.isChecked()) {
 
-        }else {
+        } else {
             binding.termsConditions.setError("Checke Terms and Conditions to continue");
             return;
         }
@@ -147,12 +147,13 @@ public class SignupActivity extends AppCompatActivity {
                 assert firebaseUser != null;
                 String userid = firebaseUser.getUid();
 
+                userModel.user_id = userid;
                 Map<String, Object> userMap = new HashMap<>();
-                userMap.put("user_id", userid);
+                userMap.put("user_id", userModel.user_id);
                 userMap.put("fullName", userModel.fullName);
                 userMap.put("email", userModel.email);
                 userMap.put("gender", userModel.gender);
-                userMap.put("userProImage", userModel.userImage);
+                userMap.put("userImage", userModel.userImage);
 
                 fireStoreDB.collection(Constants.USER).document(userid).set(userMap, SetOptions.merge())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -161,13 +162,14 @@ public class SignupActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
 
                                     Toast.makeText(SignupActivity.this, "User created", Toast.LENGTH_SHORT).show();
-
                                     Intent intent = new Intent(SignupActivity.this, ChooseMyPlantActivity.class)
                                             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                    intent.putExtra("name", userModel.username);
-                                    UtilityApp.setUserData(userModel.fullName);
+//                                    intent.putExtra("name", userMode.lusername);
                                     startActivity(intent);
                                     finish();
+                                    UtilityApp.setUserData(userModel);
+
+
                                     binding.progressBar.setVisibility(View.GONE);
                                 } else {
                                     binding.progressBar.setVisibility(View.GONE);
@@ -183,6 +185,4 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

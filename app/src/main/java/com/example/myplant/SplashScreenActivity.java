@@ -22,7 +22,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
 
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    startActivity(new Intent(SplashScreenActivity.this, ChooseMyPlantActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, NavigationActivity.class));
                 } else {
                     Intent i = new Intent(SplashScreenActivity.this, SigninActivity.class);
                     startActivity(i);

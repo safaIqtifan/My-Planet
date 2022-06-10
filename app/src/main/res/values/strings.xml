@@ -31,7 +31,6 @@
     <string name="edit_your_personal_information">Edit your personal information</string>
     <string name="my_info">My Info</string>
     <string name="logout">Logout</string>
-    <string name="terms_condition"><![CDATA[Terms & Condition]]></string>
     <string name="artical">Artical</string>
     <string name="read_clemance_terms">Read Clemance terms and condition</string>
     <string name="read_clemance_terms_and_condition">Read Clemance terms and condition</string>
@@ -54,7 +53,7 @@
     <string name="safa">Safa</string>
     <string name="please_select_one_least">Please select one at least</string>
     <string name="plant_name">Plant Name</string>
-    <string name="age">Age</string>
+    <string name="age">Plant Age</string>
     <string name="description">description</string>
     <string name="catcus">Catcus</string>
     <string name="plant_type">plant type</string>
@@ -66,5 +65,11 @@
     <string name="fail_add_post">fail add plant</string>
     <string name="success_add_post">success add plant</string>
     <string name="fail_get_data">fail get data</string>
+    <string name="success_add">Success Add</string>
+    <string name="fail">Fail</string>
+    <string name="terms_condition"><![CDATA[Terms & Condition]]></string>
+    <string name="agree_following_terms">By using Clemance you agree to the following terms:</string>
+    <string name="simply_dummy_text">simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
+    <string name="done">Done</string>
 
 </resources>
