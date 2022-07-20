@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="650dp"
     android:background="@drawable/box1border"
-    android:padding="8dp"
-    android:layout_marginBottom="16dp">
+    android:padding="8dp">
 
     <View
         android:id="@+id/view"
@@ -23,7 +22,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/signupButton"
+        app:layout_constraintBottom_toTopOf="@+id/doneButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
@@ -80,7 +79,7 @@
     </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signupButton"
+        android:id="@+id/doneButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"
@@ -89,6 +88,7 @@
         android:padding="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/done"
         android:textStyle="bold"
         android:textColor="@color/white"

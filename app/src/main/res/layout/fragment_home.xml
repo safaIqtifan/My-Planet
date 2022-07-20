@@ -12,10 +12,11 @@
         android:id="@+id/profile_imag"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
         android:src="@drawable/profile"
         app:civ_border_color="@color/white"
         app:civ_border_width="2dp"
-        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,6 +25,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/notifications"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +34,7 @@
         android:id="@+id/text_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Hello ,"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -67,7 +70,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/profile" />
+            android:src="@drawable/search" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -77,53 +80,70 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/plantTypeTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Plant Type"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchLy" />
+        app:layout_constraintTop_toBottomOf="@+id/searchLy">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/plantTypeRv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:spanCount="4"
-        tools:listitem="@layout/item_choosen_plant"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantTypeTitle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/RecentArticlesTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Recent Articles"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantTypeRv" />
+            <TextView
+                android:id="@+id/plantTypeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Plant Type"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchLy" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RecentArticlesTitle"
-        app:spanCount="4"
-        tools:listitem="@layout/item_choosen_plant" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/plantTypeRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/plantTypeTitle"
+                app:spanCount="4"
+                tools:listitem="@layout/item_choosen_plant" />
 
+            <TextView
+                android:id="@+id/RecentArticlesTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Recent Articles"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/plantTypeRv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/articalRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RecentArticlesTitle"
+                tools:listitem="@layout/item_artical" />
+
+        </LinearLayout>
+    </ScrollView>
     <ProgressBar
         android:id="@+id/loadingLY"
         android:layout_width="wrap_content"

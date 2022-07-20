@@ -6,6 +6,7 @@ public class UserModel implements Serializable {
 
     public String user_id;
     public String fullName;
+    public String password;
     public String email;
     public String gender;
     public String userImage = "";

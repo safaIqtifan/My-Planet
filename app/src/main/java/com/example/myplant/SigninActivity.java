@@ -3,11 +3,13 @@ package com.example.myplant;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,13 +17,20 @@ import com.example.myplant.Model.UserModel;
 import com.example.myplant.classes.Constants;
 import com.example.myplant.classes.UtilityApp;
 import com.example.myplant.databinding.ActivitySignInBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,6 +39,11 @@ public class SigninActivity extends AppCompatActivity {
     ActivitySignInBinding binding;
     FirebaseAuth fAuth;
     FirebaseFirestore fireStoreDB;
+
+    private static final int RC_SIGN_IN = 100;
+    private GoogleSignInClient googleSignInClient;
+//    private FirebaseAuth firebaseAuth;
+    private static final String TAG = "GOOGLE_SIGN_IN_TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,17 +108,32 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
+
+        binding.gmailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = googleSignInClient.getSignInIntent();
+                startActivityForResult(intent, RC_SIGN_IN);
+            }
+        });
+
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        if (FirebaseAuth.getInstance().getCurrentUser() != null){
-//            startActivity(new Intent(SigninActivity.this, NavigationActivity.class));
-//            finish();
-//        }
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            startActivity(new Intent(SigninActivity.this, NavigationActivity.class));
+            finish();
+        }
+    }
 
     public void ValidData() {
 
@@ -123,6 +152,63 @@ public class SigninActivity extends AppCompatActivity {
         LoginAth(emailStr, passwordStr);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN){
+            Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = accountTask.getResult(ApiException.class);
+                getData();
+            }catch (Exception e){
+                Log.e(TAG, "" + e.getMessage());
+            }
+        }
+    }
+
+//    private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
+//
+//        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+//        fAuth.signInWithCredential(credential)
+//                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//                    @Override
+//                    public void onSuccess(AuthResult authResult) {
+//                        Log.e(TAG, "onSuccess: Logged In");
+//                        FirebaseUser firebaseUser = fAuth.getCurrentUser();
+//                        String uid = firebaseUser.getUid();
+//                        String email = firebaseUser.getEmail();
+//
+//                        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+//                        if (acct != null) {
+//                            userModel.fullName = acct.getDisplayName();
+//                            String personGivenName = acct.getGivenName();
+//                            String personFamilyName = acct.getFamilyName();
+//                            userModel.email = acct.getEmail();
+//                            userModel.user_id = acct.getId();
+//                            userModel.userImage = String.valueOf(acct.getPhotoUrl());
+//
+////                            Toast.makeText(SignupActivity.this, "Name of the user :" + personName + " user id is : " + personId, Toast.LENGTH_SHORT).show();
+//
+//                        }
+//
+//                        if (authResult.getAdditionalUserInfo().isNewUser()){
+//                            Toast.makeText(SigninActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+//                        }else {
+//                            Toast.makeText(SigninActivity.this, "Existing user", Toast.LENGTH_SHORT).show();
+//                        }
+//
+////                        startActivity(new Intent(SignupActivity.this, ChooseMyPlantActivity.class));
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.e(TAG, "onFailure: " + e.getMessage());
+//                    }
+//                });
+//
+//    }
+
     public void LoginAth(String email, String password) {
 
         binding.progressBar.setVisibility(View.VISIBLE);
@@ -133,9 +219,6 @@ public class SigninActivity extends AppCompatActivity {
                         binding.progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             getData();
-                            startActivity(new Intent(SigninActivity.this, ChooseMyPlantActivity.class)
-                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                            finish();
                         } else {
                             Toast.makeText(SigninActivity.this, "fail_to_login", Toast.LENGTH_SHORT).show();
                         }
@@ -160,9 +243,12 @@ public class SigninActivity extends AppCompatActivity {
 //                                UserModel userModel = document.toObject(UserModel.class);
 //                                if ((userModel.user_id).equals(fAuth.getUid())) {
                                     UtilityApp.setUserData(user);
+                            startActivity(new Intent(SigninActivity.this, NavigationActivity.class)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            finish();
 //                                }
 //                        UserModel userDataModel = UtilityApp.getUserData();
-//                                Toast.makeText(SigninActivity.this, user., Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(SigninActivity.this, user.fullName, Toast.LENGTH_SHORT).show();
 //                            }
                         } else {
                             Toast.makeText(SigninActivity.this, getString(R.string.fail_get_data), Toast.LENGTH_SHORT).show();

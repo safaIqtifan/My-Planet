@@ -15,12 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPlant">
         <activity
+            android:name=".EditMyProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArticalActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddPlantActivity"
             android:exported="false" />
         <activity
             android:name=".NavigationActivity"
             android:exported="true"
-            android:label="@string/title_activity_navigation"/>
+            android:label="@string/title_activity_navigation" />
         <activity
             android:name=".ChooseMyPlantActivity"
             android:exported="false" />
@@ -42,6 +51,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".classes.MyFirebaseInstanceIDService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
     </application>
 
 </manifest>

@@ -52,6 +52,7 @@
             android:textSize="24sp" />
 
         <LinearLayout
+            android:id="@+id/myProfileInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -129,6 +130,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/articalLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

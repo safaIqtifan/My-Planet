@@ -20,11 +20,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.myplant.Model.AddPlantModel;
 import com.example.myplant.Model.UserModel;
 import com.example.myplant.classes.Constants;
+import com.example.myplant.classes.DateUtil;
 import com.example.myplant.classes.UtilityApp;
 import com.example.myplant.databinding.ActivityAddPlantBinding;
+import com.example.myplant.fragment.MyPlantFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -49,8 +52,14 @@ public class AddPlantActivity extends AppCompatActivity {
     AddPlantModel addPlantModel;
     FirebaseFirestore fireStoreDB;
     String plantTypeSpinnerStr = "";
+    int plantTypePosition;
+    int selectedPlantWateringDays;
     UserModel userModel;
+    Bundle bundle;
+    boolean update = false;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
+    int[] plantWateringDaysList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +72,36 @@ public class AddPlantActivity extends AppCompatActivity {
         fireStoreDB = FirebaseFirestore.getInstance();
         addPlantModel = new AddPlantModel();
 
+
+        plantWateringDaysList = getResources().getIntArray(R.array.plantWateringDays);
+
+//                Calendar calendar = Calendar.getInstance();
+//                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm/dd/yyy");
+//                String dateFormat = simpleDateFormat.format(calendar.getTime());
+//                addPlantModel.choosenPlantCurrentTime = dateFormat;
+//
+//                calendar.add(Calendar.DATE, );
+
+        bundle = getIntent().getExtras();
+        if (bundle != null) {
+            addPlantModel = (AddPlantModel) bundle.getSerializable("editeObj");
+            update = true;
+
+            binding.plantDescriptionEd.setText(addPlantModel.plantDescription);
+            binding.plantTypeSpinner.setSelection(addPlantModel.plantTypePosition);
+            binding.plantAgeEd.setText(addPlantModel.plantAge);
+            binding.plantNameEd.setText(addPlantModel.plantName);
+            binding.include.title.setText(addPlantModel.plantName);
+//            binding.include.title.setTextColor(Color.BLACK);
+            Glide.with(this).asBitmap().load(addPlantModel.plantPhoto)
+                    .placeholder(R.drawable.camera).into(binding.plantPhoto);
+
+        } else {
+            binding.include.title.setText("Add Your Plant");
+//            binding.include.title.setTextColor(Color.BLACK);
+        }
+
         userModel = UtilityApp.getUserData();
-        binding.include.title.setText("My Profile");
 
         binding.nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +113,7 @@ public class AddPlantActivity extends AppCompatActivity {
         binding.plantPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                update = false;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (getApplicationContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                             == PackageManager.PERMISSION_DENIED) {
@@ -95,10 +132,14 @@ public class AddPlantActivity extends AppCompatActivity {
         binding.plantTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i > 0)
+                if (i > 0) {
                     plantTypeSpinnerStr = binding.plantTypeSpinner.getSelectedItem().toString();
-                else
+                    plantTypePosition = binding.plantTypeSpinner.getSelectedItemPosition();
+                    selectedPlantWateringDays = plantWateringDaysList[i - 1];
+                    addPlantModel.plantWateringDayes = selectedPlantWateringDays;
+                } else {
                     plantTypeSpinnerStr = "";
+                }
             }
 
             @Override
@@ -185,17 +226,13 @@ public class AddPlantActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 exception.printStackTrace();
-//                GlobalHelper.hideProgressDialog();
-//                binding.loadingLY.setVisibility(View.GONE);
             }
         }).addOnSuccessListener(taskSnapshot -> {
 
             imgRef.getDownloadUrl().addOnCompleteListener(task -> {
 
                 addPlantModel.plantPhoto = task.getResult().toString();
-                System.out.println("Log uploaded url " + addPlantModel.plantPhoto);
-                sendPostToFirebase();
-//                binding.loadingLY.setVisibility(View.GONE);
+                sendDataToFirebase();
             });
 
 
@@ -209,9 +246,11 @@ public class AddPlantActivity extends AppCompatActivity {
         String plantDescriptionStr = binding.plantDescriptionEd.getText().toString();
 
         boolean hasError = false;
-        if (plantPhotoUri == null) {
-            Toast.makeText(this, getString(R.string.please_add_photo), Toast.LENGTH_SHORT).show();
-            hasError = true;
+        if (!update) {
+            if (plantPhotoUri == null) {
+                Toast.makeText(this, getString(R.string.please_add_photo), Toast.LENGTH_SHORT).show();
+                hasError = true;
+            }
         }
         if (plantNameStr.isEmpty()) {
             binding.plantNameEd.setError(getString(R.string.invalid_input));
@@ -236,25 +275,45 @@ public class AddPlantActivity extends AppCompatActivity {
         addPlantModel.plantName = plantNameStr;
         addPlantModel.plantAge = plantAgeStr;
         addPlantModel.plantType = plantTypeSpinnerStr;
+        addPlantModel.plantTypePosition = plantTypePosition;
         addPlantModel.plantDescription = plantDescriptionStr;
+        addPlantModel.plantWateringDayes = selectedPlantWateringDays;
+        addPlantModel.plantSun = 50;
+        addPlantModel.plantWater = 30;
+        addPlantModel.choosenPlantCurrentTime = DateUtil.GetDateWithAddNextDays(selectedPlantWateringDays);
 
-        uploadPhoto(plantPhotoUri);
+//        fetchData();
+
+        if (plantPhotoUri != null) {
+            uploadPhoto(plantPhotoUri);
+        } else {
+            sendDataToFirebase();
+        }
 
     }
 
+    private void sendDataToFirebase() {
 
-    private void sendPostToFirebase() {
-
-        String plantId = fireStoreDB.collection(Constants.PLANT).document().getId(); // this is auto genrat
-
+        String plantId;
+        if (bundle != null) {
+            plantId = addPlantModel.plant_id;
+        } else {
+            plantId = fireStoreDB.collection(Constants.PLANT).document().getId(); // this is auto genrat
+        }
         Map<String, Object> postModelMap = new HashMap<>();
         postModelMap.put("plant_id", plantId);
         postModelMap.put("userId", userModel.user_id);
         postModelMap.put("plantName", addPlantModel.plantName);
         postModelMap.put("plantAge", addPlantModel.plantAge);
         postModelMap.put("plantType", addPlantModel.plantType);
+        postModelMap.put("plantSun", addPlantModel.plantSun);
+        postModelMap.put("plantWater", addPlantModel.plantWater);
+        postModelMap.put("choosenPlantCurrentTime", addPlantModel.choosenPlantCurrentTime);
+        postModelMap.put("plantWateringDayes", addPlantModel.plantWateringDayes);
+        postModelMap.put("plantTypePosition", addPlantModel.plantTypePosition);
         postModelMap.put("plantPhoto", addPlantModel.plantPhoto);
         postModelMap.put("plantDescription", addPlantModel.plantDescription);
+        postModelMap.put("plantIsFavourite", addPlantModel.plantIsFavourite);
 
         fireStoreDB.collection(Constants.PLANT).document(plantId).set(postModelMap, SetOptions.merge())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -263,7 +322,12 @@ public class AddPlantActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
 
-                            Toast.makeText(getApplicationContext(), getString(R.string.success_add_post), Toast.LENGTH_SHORT).show();
+                            MyPlantFragment.referenceList = true;
+                            if (bundle == null) {
+                                Toast.makeText(getApplicationContext(), getString(R.string.success_add_plant), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), getString(R.string.success_update_plant), Toast.LENGTH_SHORT).show();
+                            }
                             onBackPressed();
                             binding.loadingLY.setVisibility(View.GONE);
                         } else {
@@ -275,5 +339,40 @@ public class AddPlantActivity extends AppCompatActivity {
 //        postModelMap.put("description", postModel.description);
 
     }
+
+//    public void fetchData() {
+//
+//        fireStoreDB.collection(Constants.USER).document(userModel.user_id).collection(Constants.TYPE)
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//
+//                if (task.isSuccessful()) {
+//
+//                    for (DocumentSnapshot document : task.getResult().getDocuments()) {
+//                        ChoosePlantTypeModel choosePlantTypeModel = document.toObject(ChoosePlantTypeModel.class);
+////                        choosePlantTypeModelArrayList.add(choosePlantTypeModel);
+//                        if (choosePlantTypeModel.choosenPlantName.equals(plantTypeSpinnerStr)) {
+////                            Calendar c = Calendar.getInstance();
+////                            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss");
+////                            String reg_date = df.format(c.getTime());
+////                            showtoast("Currrent Date Time : "+reg_date);
+//
+////                            c.add(Calendar.DAY_OF_MONTH, Integer.parseInt(choosePlantTypeModel.choosenPlantWateringDayes));  // number of days to add
+////                            String end_date = df.format(c.getTime());
+////                            showtoast("end Time : "+end_date);
+//
+//                            addPlantModel.choosenPlantCurrentTime = DateUtil.GetDateWithAddNextDays(choosePlantTypeModel.choosenPlantWateringDayes);
+//                            break;
+//                        }
+//                    }
+//
+//                } else {
+//                    Toast.makeText(AddPlantActivity.this, getString(R.string.fail_get_data), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
+//    }
 
 }

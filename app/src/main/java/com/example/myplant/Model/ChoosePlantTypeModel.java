@@ -7,13 +7,20 @@ public class ChoosePlantTypeModel {
     public String choosenPlantPhoto;
     public boolean isChecked = false;
     public String choosenPlantName = "";
+    public int choosenPlantWateringDayes;
+    public int plantSun;
+    public int plantWater;
 
-    public ChoosePlantTypeModel(){}
+    public ChoosePlantTypeModel() {
+    }
 
-    public ChoosePlantTypeModel(String plantTypeId, String choosenPlantName, String choosenPlantPhoto) {
-        this.plantTypeId = plantTypeId;
+    public ChoosePlantTypeModel(int choosenPlantWateringDayes, String choosenPlantName, int plantWater, int plantSun, String choosenPlantPhoto) {
+
+        this.choosenPlantWateringDayes = choosenPlantWateringDayes;
         this.choosenPlantPhoto = choosenPlantPhoto;
         this.choosenPlantName = choosenPlantName;
+        this.plantWater = plantWater;
+        this.plantSun = plantSun;
     }
 
     public String getPlantTypeId() {

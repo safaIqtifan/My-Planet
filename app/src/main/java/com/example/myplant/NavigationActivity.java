@@ -9,7 +9,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
+import com.example.myplant.classes.Constants;
+import com.example.myplant.classes.WorkManagerRequest;
 import com.example.myplant.databinding.ActivityNavigationBinding;
 
 public class NavigationActivity extends AppCompatActivity {
@@ -40,6 +45,16 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
 
+        startCheckPlantsWatering();
+
     }
 
+    private void startCheckPlantsWatering() {
+        OneTimeWorkRequest workRequest =
+                new OneTimeWorkRequest.Builder(WorkManagerRequest.class)
+                        .build();
+        WorkManager workManager = WorkManager.getInstance(this);
+        workManager.enqueueUniqueWork(Constants.CHECK_PLANTS_WORK_TAG,
+                ExistingWorkPolicy.REPLACE, workRequest);
+    }
 }

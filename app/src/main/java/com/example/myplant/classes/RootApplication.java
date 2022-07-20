@@ -1,6 +1,7 @@
 package com.example.myplant.classes;
 
 import com.akexorcist.localizationactivity.ui.LocalizationApplication;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,6 +18,14 @@ public class RootApplication extends LocalizationApplication {
 
         instance = this;
         sharedPManger = new SharedPManger(instance);
+
+        boolean isNotificationEnabled = UtilityApp.getNotificationEnabled();
+        if (isNotificationEnabled) {
+            FirebaseMessaging.getInstance().subscribeToTopic("android");
+        } else {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("android");
+        }
+
     }
 
     public static RootApplication getInstance() {

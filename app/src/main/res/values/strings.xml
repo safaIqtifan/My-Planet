@@ -38,12 +38,12 @@
 
     <string-array name="selectPlantType">
         <item>select plant Type</item>
-        <item>type1</item>
-        <item>type2</item>
-        <item>type3</item>
-        <item>type4</item>
-        <item>type5</item>
-        <item>type6</item>
+        <item>Roses and ornamental</item>
+        <item>Trees</item>
+        <item>Cactus</item>
+        <item>climbing plants</item>
+        <item>Aromatic plants</item>
+        <item>poisonous plants</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -54,7 +54,7 @@
     <string name="please_select_one_least">Please select one at least</string>
     <string name="plant_name">Plant Name</string>
     <string name="age">Plant Age</string>
-    <string name="description">description</string>
+    <string name="description">Description</string>
     <string name="catcus">Catcus</string>
     <string name="plant_type">plant type</string>
     <string name="plant_age">plant Age</string>
@@ -62,8 +62,12 @@
     <string name="please_add_photo">please add photo</string>
     <string name="invalid_input">invalid input</string>
     <string name="success_add_plant">success add plant</string>
-    <string name="fail_add_post">fail add plant</string>
-    <string name="success_add_post">success add plant</string>
+    <string name="success_add_notification">success add notification</string>
+    <string name="success">success</string>
+    <string name="fail_add_post">adding data failed </string>
+    <string name="fail_add_notification">Failed data notification </string>
+    <!--    <string name="success_add_post">success add plant</string>-->
+    <string name="success_update_plant">success update plant</string>
     <string name="fail_get_data">fail get data</string>
     <string name="success_add">Success Add</string>
     <string name="fail">Fail</string>
@@ -71,5 +75,16 @@
     <string name="agree_following_terms">By using Clemance you agree to the following terms:</string>
     <string name="simply_dummy_text">simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="done">Done</string>
+    <string name="plant_date">plant Date</string>
+    <string name="allow_notifications">Allow Notifications</string>
+    <string name="get_notifications">Get notifications about what is\n coming up with your gardens</string>
+    <string name="editpassword">Edit Password</string>
+    <string name="create_new_password">Create \nNew password</string>
+    <string name="new_password">New Password</string>
+    <string name="your_new_password">Your new password must be different form pervious used passwords</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="save">save</string>
+
+<!--    <string name="default_web_client_id">save</string>-->
 
 </resources>

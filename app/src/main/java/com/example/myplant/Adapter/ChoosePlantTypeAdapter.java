@@ -87,7 +87,7 @@ public class ChoosePlantTypeAdapter extends RecyclerView.Adapter<ChoosePlantType
 
                         } else {
                             choosePlantTypeModel.isChecked = true;
-                            dataCallBack.Result(choosePlantTypeModel, "add", "");
+                            dataCallBack.Result(choosePlantTypeModel, "add", "isChecked");
 //                            checkImage.setImageResource(R.drawable.unchecked);
                         }
                         notifyItemChanged(getAdapterPosition());

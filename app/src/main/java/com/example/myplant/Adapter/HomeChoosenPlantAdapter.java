@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class HomeChoosenPlantAdapter extends RecyclerView.Adapter<HomeChoosenPla
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         ChoosePlantTypeModel choosePlantTypeModel = list.get(position);
+        holder.plantName.setText(choosePlantTypeModel.choosenPlantName);
         Glide.with(activity).asBitmap().load(choosePlantTypeModel.getChoosenPlantPhoto()).placeholder(R.drawable.planttype).into(holder.plantImageView);
 
     }
@@ -52,6 +54,7 @@ public class HomeChoosenPlantAdapter extends RecyclerView.Adapter<HomeChoosenPla
 
         ImageView plantImageView;
         ImageView checkImage;
+        TextView plantName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +62,7 @@ public class HomeChoosenPlantAdapter extends RecyclerView.Adapter<HomeChoosenPla
 
             plantImageView = itemView.findViewById(R.id.plantImage);
             checkImage = itemView.findViewById(R.id.checkImage);
+            plantName = itemView.findViewById(R.id.plantName);
 
         }
     }

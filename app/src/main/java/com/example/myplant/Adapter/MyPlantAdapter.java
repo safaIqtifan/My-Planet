@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myplant.Model.AddPlantModel;
 import com.example.myplant.R;
+import com.example.myplant.classes.DataCallBack;
 import com.example.myplant.databinding.ItemMyplantBinding;
 
 import java.util.ArrayList;
@@ -19,10 +20,12 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.MyViewHo
 
     public ArrayList<AddPlantModel> myArray;
     Activity context;
+    DataCallBack callBack;
 
-    public MyPlantAdapter(Activity context, ArrayList<AddPlantModel> myArray) {
+    public MyPlantAdapter(Activity context, ArrayList<AddPlantModel> myArray, DataCallBack callBack) {
         this.myArray = myArray;
         this.context = context;
+        this.callBack = callBack;
     }
 
     @NonNull
@@ -77,6 +80,9 @@ public class MyPlantAdapter extends RecyclerView.Adapter<MyPlantAdapter.MyViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    AddPlantModel addPlantModel = myArray.get(getAdapterPosition());
+                    callBack.Result(addPlantModel, "", getAdapterPosition());
 
                 }
             });

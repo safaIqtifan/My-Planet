@@ -17,6 +17,10 @@ android {
     }
 
     buildTypes {
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -53,12 +57,14 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.5'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.github.simonebortolin:FlowLayoutManager:1.8.0'
     implementation 'com.github.xabaras:RecyclerViewSwipeDecorator:1.4'
-
+    implementation "androidx.work:work-runtime:2.5.0"
 
     
     testImplementation 'junit:junit:4.13.2'
